@@ -1,0 +1,308 @@
+<html>
+<body>
+    <div class="login">
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <!-- <form> -->
+        <h1>
+            <legend>Flight Price Predictor</legend>
+        </h1>
+        <div class="mb-3">
+            <label class="form-label">Airline</label>
+            <select class="form-control" name="airline" placeholder="Select your airline" required>
+                <option class="placeholder" selected disabled value="">Select your Airline</option>
+                <option value="Air India">
+                    Air India
+                </option>
+                <option value="GoAir">
+                    Go Air
+                </option>
+                <option value="IndiGo">
+                    IndiGo
+                </option>
+
+                <option value="Jet Airways">
+                    Jet Airways
+                </option>
+                <option value="Jet Airways Business">
+                    Jet Airways Business
+                </option>
+                <option value="Multiple carriers">
+                    Multiple carriers
+                </option>
+                <option value="Multiple carriers Premium economy">
+                    Multiple carriers Premium economy
+                </option>
+                <option value="SpiceJet">
+                    SpiceJet
+                </option>
+
+                <option value="Trujet">
+                    Trujet
+                </option>
+                <option value="Vistara">
+                    Vistara
+                </option>
+                <option value="Vistara Premium economy">
+                    Vistara Premium economy
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Total Stops</label>
+            <input class="form-control" type="number" name="total_stops"
+                placeholder="Enter Total Stops" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Journey Date</label>
+            <input class="form-control" type="number" name="journey_date"
+                placeholder="Enter Journey Date" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Enter Journey Month in numbers</label>
+            <input class="form-control" type="number" name="journey_month"
+                placeholder="Enter Journey month in numbers" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Departure Hours</label>
+            <input class="form-control" type="number" name="dep_hr"
+                placeholder="Enter flight departure hours" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Departure Minutes</label>
+            <input class="form-control" type="number" name="dep_min"
+                placeholder="Enter flight departure minutes" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Arrival Hours</label>
+            <input class="form-control" type="number" name="arr_hr"
+                placeholder="Enter flight arrival hours" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Arrival Minutes</label>
+            <input class="form-control" type="number" name="arr_min"
+                placeholder="Enter flight arrival minutes" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Duration Hours</label>
+            <input class="form-control" type="number" name="dur_hr"
+                placeholder="Enter flight duration hours" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Duration Minutes</label>
+            <input class="form-control" type="number" name="dur_min"
+                placeholder="Enter flight duration mins" min='0' max='100' />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Source</label>
+            <select class="form-control" name="source" placeholder="Source" required>
+                <option class="placeholder" selected disabled value="">Select Source</option>
+                <option value="Chennai">
+                    Chennai
+                </option>
+                <option value="Delhi">
+                    Delhi
+                </option>
+                <option value="Kolkata">
+                    Kolkata
+                </option>
+                <option value="Mumbai">
+                    Mumbai
+                </option>
+                <option value="Banglore">
+                    Bangalore
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Destination</label>
+            <select class="form-control" name="destination"
+                placeholder="Destination" required>
+                <option class="placeholder" selected disabled value="">Select Destination</option>
+                <option value="Cochin">
+                    Cochin
+                </option>
+                <option value="Delhi">
+                    Delhi
+                </option>
+                <option value="Hyderabad">
+                    Hyderabad
+                </option>
+                <option value="Kolkata">
+                    Kolkata
+                </option>
+                <option value="Bangalore">
+                    Bangalore
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict Flight Price" required />
+        </div>
+    </form>
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Banglore Home Price Prediction</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./home.js"></script>
+    <link rel="stylesheet" href="./home.css">
+</head>
+
+<body>
+    <div class="img"></div>
+    <form class="form">
+        <div>
+            <h2>Airline</h2>
+            <select class="form-control" name="Airline" placeholder="Select your airline" id="airline" required>
+                <option class="placeholder" selected disabled value="">Select your Airline</option>
+                <option value="Airline_Air India">
+                    Air India
+                </option>
+                <option value="Airline_GoAir">
+                    Go Air
+                </option>
+                <option value="Airline_IndiGo">
+                    IndiGo
+                </option>
+
+                <option value="Airline_Jet Airways">
+                    Jet Airways
+                </option>
+                <option value="Airline_Jet Airways Business">
+                    Jet Airways Business
+                </option>
+                <option value="Airline_Multiple carriers">
+                    Multiple carriers
+                </option>
+                <option value="Airline_Multiple carriers Premium economy">
+                    Multiple carriers Premium economy
+                </option>
+                <option value="Airline_SpiceJet">
+                    SpiceJet
+                </option>
+
+                <option value="Airline_Trujet">
+                    Trujet
+                </option>
+                <option value="Airline_Vistara">
+                    Vistara
+                </option>
+                <option value="Airline_Vistara Premium economy">
+                    Vistara Premium economy
+                </option>
+                <option value="Airline_Air Asia">
+                    Air Asia
+                </option>
+            </select>
+        </div>
+    </form>
+    <form class="form">
+        <h2>Total Stops</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" id="total_Stops"
+            placeholder="Enter Total Stops" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Journey Date</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" id="journey_date"
+            placeholder="Enter Journey Date" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Journey Month</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" name="journey_month"
+            placeholder="Enter Journey Month" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Departure Hour</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" name="dep_hr"
+            placeholder="Enter Departure Hour" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Departure Minutes</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" name="dep_min"
+            placeholder="Enter Departure Minutes" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Arrival Hour</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" name="arr_hr"
+            placeholder="Enter Arrival Hour" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Arrival Minutes</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" name="arr_min"
+            placeholder="Enter Arrival Minutes" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Duration Hour</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" name="dur_hr"
+            placeholder="Enter Duration Hour" min='0' max='100' style="width: 200px" />
+        </div>
+
+        <h2>Duration Minutes</h2>
+        <div class="switch-field">
+            <input class="form-control" type="number" name="dur_min"
+            placeholder="Enter Duration Minutes" min='0' max='100' style="width: 200px" />
+        </div>
+
+
+
+
+        <h2>Source</h2>
+        <div>
+            <select class="location" name="" id="source">
+                <option value="" disabled="disabled" selected="selected">Choose Source Location</option>
+                <option>Chennai</option>
+                <option>Delhi</option>
+                <option>Kolkata</option>
+                <option>Mumbai</option>
+                <option>Bangalore</option>
+            </select>
+        </div>
+
+        <h2>Destination</h2>
+        <div>
+            <select class="location" name="" id="destination">
+                <option value="" disabled="disabled" selected="selected">Choose Source Location</option>
+                <option>New Delhi</option>
+                <option>Bangalore</option>
+                <option>Cochin</option>
+                <option>Kolkata</option>
+                <option>Delhi</option>
+                <option>Hyderabad</option>
+            </select>
+        </div>
+
+        <button class="submit" onclick="onClickedEstimatePrice()" type="submit">Estimate Price</button>
+        <div id="uiEstimatedPrice" class="result">
+            <h2></h2>
+        </div>
+</body>
+
+</html> -->

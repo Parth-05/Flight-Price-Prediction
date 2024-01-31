@@ -1,0 +1,9 @@
+1. Set up the github Repository
+  a) New environment
+	conda create -p venv python==3.8 -y
+	# To activate venv env.
+	conda activate venv
+  b) Setup.py
+  c) requirements.txt
+
+2. Src folder and build the package
