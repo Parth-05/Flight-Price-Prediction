@@ -1,0 +1,48 @@
+.title-container {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.box-container {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    padding-top: 10vh;
+    height: fit-content;
+    border: 2px solid #0000007a;
+    margin: 5vh 20vw;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+.row-container {
+    display: flex;
+    justify-content: space-between; /* Adjusts space between fields */
+}
+
+
+.text-field {
+    margin-bottom: 5vh !important;
+    width: 22vw;
+}
+
+.login-btn-container {
+    padding-top: 2vh;
+    margin-bottom: 5vh;
+}
+
+.login-btn {
+    width: 10vw;
+    height: 7vh;
+    background: #ff8800d1;
+}
