@@ -5,7 +5,10 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 
-application = Flask(__name__)
+application = Flask(__name__,
+                    static_url_path='',
+        static_folder='./client/build',
+        template_folder='./client/build')
 
 app = application
 
