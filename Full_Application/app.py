@@ -9,11 +9,6 @@ application = Flask(__name__)
 
 app = application
 
-## Route for Home Page
-@app.route('/')
-def index():
-    return render_template('index.html')
-
 @app.route('/predictdata', methods=['GET', 'POST'])
 @cross_origin()
 def predict_datapoint():
