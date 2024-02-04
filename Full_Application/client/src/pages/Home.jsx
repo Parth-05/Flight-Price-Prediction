@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import './Home.css'
 import { predictPrice } from '../redux/actions/PredictPriceAction';
@@ -8,15 +7,11 @@ import { predictPrice } from '../redux/actions/PredictPriceAction';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
     const title = 'Flight Price Predictor';
 
-    // const predictedPriceSelector = useSelector((state) => state.predictPrice)
     const predictedPriceFromRedux = useSelector((state) => state?.predictedPrice);
-    const [predictedPrice, setPredictedPrice] = useState('');
-    const [isPriceVisible, setIsPriceVisible] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -123,18 +118,7 @@ const Home = () => {
             source,
             destination
             ))
-            setIsPriceVisible(true);
-
-            console.log(predictedPriceFromRedux)
     }
-
-    useEffect(() => {
-        if (predictedPriceFromRedux) {
-            setPredictedPrice(predictedPriceFromRedux?.predictedPrice);
-            setIsPriceVisible(true);
-        }
-        console.log(predictedPriceFromRedux)
-    }, [predictedPriceFromRedux]);
 
     return (
         <>
