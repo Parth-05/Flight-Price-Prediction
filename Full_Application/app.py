@@ -12,6 +12,12 @@ application = Flask(__name__,
 
 app = application
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
+
+
 @app.route('/predictdata', methods=['GET', 'POST'])
 @cross_origin()
 def predict_datapoint():
