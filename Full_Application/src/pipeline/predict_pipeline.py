@@ -11,8 +11,8 @@ class PredictPipeline:
     def predict(self,features):
         try:
             artifacts_dir = os.environ.get('ARTIFACTS_DIR', 'artifacts')  # Set a default path
-            model_path=os.path.join(artifacts_dir,"model.pkl")
-            preprocessor_path=os.path.join(artifacts_dir,'preprocessor.pkl')
+            model_path=os.path.join(os.getcwd(), artifacts_dir,"model.pkl")
+            preprocessor_path=os.path.join(os.getcwd(), artifacts_dir,'preprocessor.pkl')
             print("Model Path: ", model_path)
             print("preprocessor_path: ", preprocessor_path)
             print("CWD: ", os.getcwd())
