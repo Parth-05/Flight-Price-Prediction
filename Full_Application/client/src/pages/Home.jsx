@@ -4,7 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Home.css'
 import { predictPrice } from '../redux/actions/PredictPriceAction';
 
-import TextField from '@mui/material/TextField';
+import {TextField, FormHelperText } from '@mui/material';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Button } from '@mui/material';
 
@@ -24,6 +29,14 @@ const Home = () => {
     const handleTotalStopsChange = (event) => {
         setTotalStops(event.target.value)
     }
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        const datePart = date.date(); // gets the day of the month as a number
+        setJourneyDate((Math.floor(datePart)))
+        const monthPart = date.month() + 1; // gets the month as a number (0 = January, 11 = December)
+        setJourneyMonth(Math.floor(monthPart))
+      };
 
     const [journey_date, setJourneyDate] = useState();
     const handleJourneyDateValueChange = (event) => {
@@ -34,6 +47,38 @@ const Home = () => {
     const handleJourneyMonthValueChange = (event) => {
         setJourneyMonth(event.target.value)
     }
+
+    const [departureTime, setDepartureTime] = useState(null);
+    const [arrivalTime, setArrivalTime] = useState(null);
+
+    const handleDepartureTimeChange = (newTime) => {
+        if (newTime && newTime.isValid()) { // Check if the Day.js object is valid
+            setDepartureTime(newTime);
+            const hours = newTime.hour(); // Use .hour() for Day.js objects
+            const minutes = newTime.minute(); // Use .minute() for Day.js objects
+            setDepartureHours(hours)
+            setDepartureMinutes(minutes)
+            console.log(`Departure Time - Hours: ${hours}, Minutes: ${minutes}`);
+          } else {
+            setDepartureTime(null); // Reset the departure time if it's not valid
+          }
+    };
+
+    const handleArrivalTimeChange = (newTime) => {
+        if (newTime && newTime.isValid()) { // Check if the Day.js object is valid
+            // Convert both times to the number of minutes from the start of the day
+            const departureMinutes = departureTime ? (departureTime.hour() * 60 + departureTime.minute()) : 0;
+            const arrivalMinutes = (newTime.hour() * 60 + newTime.minute());
+        
+              setArrivalTime(newTime);
+              const hours = newTime.hour(); // Use .hour() for Day.js objects
+              const minutes = newTime.minute(); // Use .minute() for Day.js objects
+              setArrivalHours(hours)
+              setArrivalMinutes(minutes)
+              // Now you have hours and minutes from arrival time, you can do what you need with it
+              console.log(`Arrival Time - Hours: ${hours}, Minutes: ${minutes}`);
+            }
+    };
 
     const [dep_hr, setDepartureHours] = useState();
     const handleDepartureHoursValueChange = (event) => {
@@ -128,7 +173,7 @@ const Home = () => {
             <div className='box-container'>
                 <div className='form-container'>
 
-                    <div className="row-container">
+                    {/* <div className="row-container"> */}
                     {/* Airlines */}
                     <Autocomplete className='text-field'
                         disablePortal
@@ -147,11 +192,15 @@ const Home = () => {
                         value={total_stops}
                         onChange={handleTotalStopsChange}
                         type="number"
+                        inputProps={{
+                            min: 0, // Minimum value
+                            max: 2  // Maximum value
+                        }}
                     />
-                    </div>
-                    <div className="row-container">
+                    {/* </div> */}
+                    {/* <div className="row-container"> */}
                     {/* Journey Date */}
-                    <TextField
+                    {/* <TextField
                         className='text-field'
                         id="journey_date"
                         label="Journey Date"
@@ -160,9 +209,9 @@ const Home = () => {
                         value={journey_date}
                         onChange={handleJourneyDateValueChange}
                         type="number"
-                    />
+                    /> */}
                     {/* Journey Month */}
-                    <TextField
+                    {/* <TextField
                         className='text-field'
                         id="journey_month"
                         label="Journey Month"
@@ -172,10 +221,41 @@ const Home = () => {
                         onChange={handleJourneyMonthValueChange}
                         type="number"
                     />
-                    </div>
+                    </div> */}
                     <div className="row-container">
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker className='text-field' label="Journey Date" onChange={handleDateChange} />
+                        </LocalizationProvider>
+                    </div>
+
+                    <div className="row-container">
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <TimePicker className='text-field' label="Departure Time" onChange={handleDepartureTimeChange} />
+                        </LocalizationProvider>
+                    </div>
+
+                    <div className="row-container">
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            {/* <DemoContainer components={['TimePicker']}> */}
+                            <TimePicker
+                                className='text-field'
+                                label="Arrival Time"
+                                onChange={handleArrivalTimeChange}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                    />
+                                )}
+                            />
+
+                           
+                            {/* </DemoContainer> */}
+                        </LocalizationProvider>
+                    </div>
+
+                    {/* <div className="row-container"> */}
                     {/* Departure Hours */}
-                    <TextField
+                    {/* <TextField
                         className='text-field'
                         id="dep_hr"
                         label="Departure Time (in hours)"
@@ -184,9 +264,9 @@ const Home = () => {
                         value={dep_hr}
                         onChange={handleDepartureHoursValueChange}
                         type="number"
-                    />
+                    /> */}
                     {/* Departure Minutes */}
-                    <TextField
+                    {/* <TextField
                         className='text-field'
                         id="dep_min"
                         label="Departure Minutes (in mins)"
@@ -196,10 +276,10 @@ const Home = () => {
                         onChange={handleDepartureMinutesValueChange}
                         type="number"
                     />
-                    </div>
-                    <div className="row-container">
+                    </div> */}
+                    {/* <div className="row-container"> */}
                     {/* Arrival Hours */}
-                    <TextField
+                    {/* <TextField
                         className='text-field'
                         id="arr_hr"
                         label="Arrival Hours"
@@ -208,9 +288,9 @@ const Home = () => {
                         value={arr_hr}
                         onChange={handleArrivalHoursValueChange}
                         type="number"
-                    />
+                    /> */}
                     {/* Arrival Minutes */}
-                    <TextField
+                    {/* <TextField
                         className='text-field'
                         id="arr_min"
                         label="Arrival Minutes"
@@ -220,8 +300,8 @@ const Home = () => {
                         onChange={handleArrivalMinutesValueChange}
                         type="number"
                     />
-                    </div>
-                    <div className="row-container">
+                    </div> */}
+                    {/* <div className="row-container"> */}
                     {/* Duration Hours */}
                     <TextField
                         className='text-field'
@@ -244,8 +324,8 @@ const Home = () => {
                         onChange={handleDurationMinutesValueChange}
                         type="number"
                     />
-                    </div>
-                    <div className="row-container">
+                    {/* </div> */}
+                    {/* <div className="row-container"> */}
                     {/* Source */}
                     <Autocomplete className='text-field'
                         disablePortal
@@ -262,12 +342,11 @@ const Home = () => {
                         onChange={handleDestinationValueChange}
                         renderInput={(params) => <TextField {...params} label="Destination" />}
                     />
-                    </div>
+                    {/* </div> */}
                     <div className='login-btn-container'>
                         <Button className='login-btn' variant="contained" onClick={handlePredictPrice}>Predict Price</Button>
+                        {predictedPriceFromRedux?.predictedPrice && <div className='output-container'>Predicted price of the Flight is <b>Rs. {predictedPriceFromRedux?.predictedPrice}</b></div>}
                     </div>
-                    
-                    {predictedPriceFromRedux?.predictedPrice && <div>Predicted price of the Flight is <b>Rs. {predictedPriceFromRedux?.predictedPrice}</b></div>}
                 </div>
             </div>
 
