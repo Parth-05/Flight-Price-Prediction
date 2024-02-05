@@ -21,7 +21,8 @@ export const predictPrice = (
             const config = { headers: { "Content-Type": "application/json" } };
         
             const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/predictdata`,
+                // `${process.env.REACT_APP_API_URL}/predictdata`,
+                `/predictdata`,
                 { airline,
                     total_stops,
                     journey_date,
