@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Home.css'
 import { predictPrice } from '../redux/actions/PredictPriceAction';
 
-import {TextField, FormHelperText } from '@mui/material';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import {TextField } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -29,9 +28,7 @@ const Home = () => {
     const handleTotalStopsChange = (event) => {
         setTotalStops(event.target.value)
     }
-    const [selectedDate, setSelectedDate] = useState(new Date());
     const handleDateChange = (date) => {
-        setSelectedDate(date);
         const datePart = date.date(); // gets the day of the month as a number
         setJourneyDate((Math.floor(datePart)))
         const monthPart = date.month() + 1; // gets the month as a number (0 = January, 11 = December)
@@ -39,38 +36,24 @@ const Home = () => {
       };
 
     const [journey_date, setJourneyDate] = useState();
-    const handleJourneyDateValueChange = (event) => {
-        setJourneyDate(event.target.value);
-    }
 
     const [journey_month, setJourneyMonth] = useState();
-    const handleJourneyMonthValueChange = (event) => {
-        setJourneyMonth(event.target.value)
-    }
 
-    const [departureTime, setDepartureTime] = useState(null);
-    const [arrivalTime, setArrivalTime] = useState(null);
 
     const handleDepartureTimeChange = (newTime) => {
         if (newTime && newTime.isValid()) { // Check if the Day.js object is valid
-            setDepartureTime(newTime);
             const hours = newTime.hour(); // Use .hour() for Day.js objects
             const minutes = newTime.minute(); // Use .minute() for Day.js objects
             setDepartureHours(hours)
             setDepartureMinutes(minutes)
             console.log(`Departure Time - Hours: ${hours}, Minutes: ${minutes}`);
-          } else {
-            setDepartureTime(null); // Reset the departure time if it's not valid
           }
     };
 
     const handleArrivalTimeChange = (newTime) => {
         if (newTime && newTime.isValid()) { // Check if the Day.js object is valid
             // Convert both times to the number of minutes from the start of the day
-            const departureMinutes = departureTime ? (departureTime.hour() * 60 + departureTime.minute()) : 0;
-            const arrivalMinutes = (newTime.hour() * 60 + newTime.minute());
         
-              setArrivalTime(newTime);
               const hours = newTime.hour(); // Use .hour() for Day.js objects
               const minutes = newTime.minute(); // Use .minute() for Day.js objects
               setArrivalHours(hours)
@@ -81,24 +64,12 @@ const Home = () => {
     };
 
     const [dep_hr, setDepartureHours] = useState();
-    const handleDepartureHoursValueChange = (event) => {
-        setDepartureHours(event.target.value)
-    }
 
     const [dep_min, setDepartureMinutes] = useState();
-    const handleDepartureMinutesValueChange = (event) => {
-        setDepartureMinutes(event.target.value)
-    }
 
     const [arr_hr, setArrivalHours] = useState();
-    const handleArrivalHoursValueChange = (event) => {
-        setArrivalHours(event.target.value)
-    }
 
     const [arr_min, setArrivalMinutes] = useState();
-    const handleArrivalMinutesValueChange = (event) => {
-        setArrivalMinutes(event.target.value)
-    }
 
     const [dur_hr, setDurationHours] = useState();
     const handleDurationHoursValueChange = (event) => {
