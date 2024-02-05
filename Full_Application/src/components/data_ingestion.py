@@ -10,9 +10,10 @@ from src.components.model_trainer import ModelTrainer
 
 @dataclass
 class DataIngestionConfig:
-    train_data_path: str = os.path.join('artifacts', "train.csv")
-    test_data_path: str = os.path.join('artifacts', "test.csv")
-    raw_data_path: str = os.path.join('artifacts', "data.csv")
+    artifacts_dir = os.environ.get('ARTIFACTS_DIR', 'artifacts')  # Set a default path
+    train_data_path: str = os.path.join(artifacts_dir, "train.csv")
+    test_data_path: str = os.path.join(artifacts_dir, "test.csv")
+    raw_data_path: str = os.path.join(artifacts_dir, "data.csv")
 
 class DataIngestion:
     def __init__(self):

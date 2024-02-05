@@ -21,7 +21,8 @@ from src.utils import save_object,evaluate_models
 
 @dataclass
 class ModelTrainerConfig:
-    trained_model_file_path = os.path.join("artifacts", "model.pkl")
+    artifacts_dir = os.environ.get('ARTIFACTS_DIR', 'artifacts')  # Set a default path
+    trained_model_file_path = os.path.join(artifacts_dir, "model.pkl")
 
 class ModelTrainer:
     def __init__(self):
