@@ -13,6 +13,9 @@ class PredictPipeline:
             artifacts_dir = os.environ.get('ARTIFACTS_DIR', 'artifacts')  # Set a default path
             model_path=os.path.join(artifacts_dir,"model.pkl")
             preprocessor_path=os.path.join(artifacts_dir,'preprocessor.pkl')
+            print("Model Path: ", model_path)
+            print("preprocessor_path: ", preprocessor_path)
+            print("CWD: ", os.getcwd())
             print("Before Loading")
             model=load_object(file_path=model_path)
             print("Model: ", model)
