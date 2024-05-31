@@ -40,7 +40,7 @@ Live Project Link: https://flight-price-predictor-08xr.onrender.com/
 ## How to Run the Project
 
 1. Clone the repository:
-    git clone https://github.com/yourusername/flight-price-prediction.git
+    git clone https://github.com/Parth-05/flight-price-prediction.git
     
 2. Navigate to the project directory:
     cd flight-price-prediction
